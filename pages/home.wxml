@@ -1,0 +1,12 @@
+<view class="page">
+  <view class="page__hd">
+    <image src="{{userInfo.avatarUrl}}"></image>
+  </view>
+  <view class="page__bd">
+  </view>
+  <view class="page__ft">
+    <view class="weui-footer">
+      <view class="weui-footer__text">Copyright © 2017 QingDiet Team</view>
+    </view>
+  </view>
+</view>

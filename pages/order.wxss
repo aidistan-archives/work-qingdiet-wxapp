@@ -1,0 +1,12 @@
+.weui-navbar__item {
+  padding: 0;
+}
+
+.weui-navbar__item image {
+  width: 41rpx;
+  height: 41rpx;
+}
+
+.weui-tab__panel {
+  padding-top: 61rpx;
+}

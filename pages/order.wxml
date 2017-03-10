@@ -1,0 +1,96 @@
+<view class="_container">
+  <view class="weui-tab">
+    <view class="weui-navbar">
+      <block wx:for-items="{{tabs}}" wx:key="{{item}}">
+        <view id="{{item}}" class="weui-navbar__item {{activeTab == item ? 'weui-bar__item_on' : ''}}" bindtap="handleTabTap">
+          <view class="weui-navbar__title">
+            <image src="../assets/icon-{{item}}{{activeTab == item ? '-primary' : ''}}.png"></image>
+          </view>
+        </view>
+      </block>
+    </view>
+
+
+    <view class="weui-tab__panel">
+      <view class="weui-tab__content" hidden="{{activeTab != 'measurement'}}">
+        <view class="weui-cells__title">使用最近一次测量数据</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">年龄</view>
+              <view class="weui-cell__ft">25.5岁</view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">身高</view>
+              <view class="weui-cell__ft">180cm</view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">体重</view>
+              <view class="weui-cell__ft">77kg</view>
+            </view>
+            <view class="weui-cell">
+              <view class="weui-cell__bd">活动指数</view>
+              <view class="weui-cell__ft">1.2</view>
+            </view>
+        </view>
+        <button class="weui-btn weui-btn_spacing" type="primary" plain="true">确认使用此次数据</button>
+
+        <view class="weui-cells__title">使用新的测量数据</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+                <view class="weui-label">年龄</view>
+              </view>
+              <view class="weui-cell__bd">
+                <input class="weui-input" placeholder="周岁"/>
+              </view>
+            </view>
+            <view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+                <view class="weui-label">身高</view>
+              </view>
+              <view class="weui-cell__bd">
+                <input class="weui-input" placeholder="厘米"/>
+              </view>
+            </view>
+            <view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+                <view class="weui-label">体重</view>
+              </view>
+              <view class="weui-cell__bd">
+                <input class="weui-input" placeholder="公斤"/>
+              </view>
+            </view>
+            <view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+                <view class="weui-label">活动指数</view>
+              </view>
+              <view class="weui-cell__bd">
+                <input class="weui-input" placeholder=""/>
+              </view>
+            </view>
+        </view>
+        <button class="weui-btn weui-btn_spacing" type="primary">确认使用新的数据</button>
+      </view>
+
+
+      <view class="weui-tab__content" hidden="{{activeTab != 'requirement'}}">
+        requirement
+      </view>
+
+
+      <view class="weui-tab__content" hidden="{{activeTab != 'dishes'}}">
+        dishes
+      </view>
+
+
+      <view class="weui-tab__content" hidden="{{activeTab != 'combo'}}">
+        combo
+      </view>
+
+
+      <view class="weui-tab__content" hidden="{{activeTab != 'order'}}">
+        order
+      </view>
+    </view>
+  </view>
+</view>
