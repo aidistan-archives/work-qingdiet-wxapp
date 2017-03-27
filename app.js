@@ -5,7 +5,7 @@ App({
   },
   globalData: {
     config: {
-      host: 'https://example.com',
+      host: 'https://api.qdiet.cn',
       debug: true
     },
 
@@ -29,15 +29,17 @@ App({
     } else {
       wx.login({
         success: function(res) {
-          self.log('微信登陆成功', { code: res.code})
+          self.log('微信登陆成功', {code: res.code})
           self.globalData.code = res.code
           typeof cb == "function" && cb()
+        },
+        fail: function() {
+          self.log('微信登陆失败')
         }
       })
     }
   },
   loginQingDiet: function(cb) {
-    var self = this
     if (this.globalData.token) {
       typeof cb == "function" && cb()
     } else if (this.globalData.code) {
@@ -48,7 +50,19 @@ App({
   },
   _loginQingDiet: function(cb) {
     var self = this
-    self.globalData.token = 'fake'
+    wx.request({
+      url: this.globalData.config.host + '/v1/login/weixin/access_token',
+      data: {code: this.globalData.code},
+      method: 'POST',
+      success: function(res) {
+        self.log('系统登陆成功', {body: res.data})
+        self.globalData.token = res.data.access_token
+        typeof cb == "function" && cb()
+      },
+      fail: function() {
+        self.log('系统登陆失败')
+      }
+    })
   },
   getUserInfo: function(cb) {
     var self = this
