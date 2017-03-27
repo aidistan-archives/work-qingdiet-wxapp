@@ -3,8 +3,8 @@
 }
 
 .weui-navbar__item image {
-  width: 41rpx;
-  height: 41rpx;
+  width: 51rpx;
+  height: 51rpx;
 }
 
 .weui-tab__panel {

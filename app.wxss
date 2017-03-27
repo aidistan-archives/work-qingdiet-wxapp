@@ -1,5 +1,23 @@
 @import "weui.wxss";
 
+/**
+ * Supplementary for WeUI
+ */
+
+.weui-btn_spacing {
+  margin-left: 15rpx;
+  margin-right: 15rpx;
+}
+
+.weui-cell_slider {
+  padding-top: 5rpx;
+  padding-bottom: 5rpx;
+}
+
+/**
+ * Global styles
+ */
+
 page {
   background-color: #F8F8F8;
   font-size: 23rpx;
@@ -15,9 +33,4 @@ page {
   flex-direction: column;
   align-items: stretch;
   justify-content: flex-start;
-}
-
-.weui-btn_spacing {
-  margin-left: 15rpx;
-  margin-right: 15rpx;
 }

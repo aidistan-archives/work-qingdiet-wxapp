@@ -6,7 +6,8 @@
   "window":{
     "navigationBarTitleText": "轻食代",
     "navigationBarTextStyle":"black",
-    "navigationBarBackgroundColor": "#f8f8f8"
+    "navigationBarBackgroundColor": "#f8f8f8",
+    "backgroundColor": "#f8f8f8"
   },
   "tabBar": {
     "list": [{
