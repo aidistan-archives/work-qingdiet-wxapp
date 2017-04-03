@@ -1,6 +1,31 @@
 @import "weui.wxss";
 
 /**
+ * Supplementary for built-in
+ */
+
+button[type="secondary"] {
+  color: #FFFFFF;
+  background-color: #2880D7;
+}
+
+button[type="secondary"][plain] {
+  color: #2880D7;
+  border: 1px solid #2880D7;
+  background-color: transparent;
+}
+
+button[type="secondary"][disabled] {
+  background-color:#82B7EB;
+}
+
+button[type="secondary"][plain][disabled] {
+  color: rgba(0, 0, 0, 0.2);
+  border-color: rgba(0, 0, 0, 0.2);
+  background-color: transparent;
+}
+
+/**
  * Supplementary for WeUI
  */
 

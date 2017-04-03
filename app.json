@@ -1,7 +1,8 @@
 {
   "pages":[
     "pages/order",
-    "pages/home"
+    "pages/account",
+    "pages/orders/new"
   ],
   "window":{
     "navigationBarTitleText": "轻食代",
@@ -16,7 +17,7 @@
       "iconPath": "assets/icon-add.png",
       "selectedIconPath": "assets/icon-add-primary.png"
     }, {
-      "pagePath": "pages/home",
+      "pagePath": "pages/account",
       "text": "我的",
       "iconPath": "assets/icon-account.png",
       "selectedIconPath": "assets/icon-account-primary.png"

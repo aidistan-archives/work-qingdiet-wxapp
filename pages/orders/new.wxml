@@ -1,0 +1,233 @@
+<view class="page">
+  <view class="weui-tab">
+    <view class="weui-navbar">
+      <block wx:for-items="{{tabs}}" wx:key="{{item}}">
+        <view id="nav-{{item}}" class="weui-navbar__item" bindtap="handleNavTap">
+          <view class="weui-navbar__title">
+            <image src="/assets/icon-{{item}}{{activeTab == item ? '-primary' : ''}}.png"></image>
+          </view>
+        </view>
+      </block>
+    </view>
+    <view class="weui-tab__panel">
+
+
+      <view id="tab-measurement" class="weui-tab__content" hidden="{{activeTab != 'measurement'}}">
+        <view class="weui-cells__title">使用最近一次测量数据</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">年龄</view>
+            <view class="weui-cell__ft">25.5岁</view>
+          </view>
+          <view class="weui-cell">
+            <view class="weui-cell__bd">身高</view>
+            <view class="weui-cell__ft">180cm</view>
+          </view>
+          <view class="weui-cell">
+            <view class="weui-cell__bd">体重</view>
+            <view class="weui-cell__ft">77kg</view>
+          </view>
+          <view class="weui-cell">
+            <view class="weui-cell__bd">活动指数</view>
+            <view class="weui-cell__ft">1.2</view>
+          </view>
+        </view>
+        <button class="weui-btn weui-btn_spacing" type="primary" plain="true">确认使用此次数据</button>
+
+        <view class="weui-cells__title">使用新的测量数据</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">年龄</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" placeholder="周岁"/>
+            </view>
+          </view>
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">身高</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" placeholder="厘米"/>
+            </view>
+          </view>
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">体重</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" placeholder="公斤"/>
+            </view>
+          </view>
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">活动指数</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" placeholder=""/>
+            </view>
+          </view>
+        </view>
+        <button class="weui-btn weui-btn_spacing" type="primary">确认使用新的数据</button>
+      </view>
+
+
+      <view id="tab-requirement" class="weui-tab__content" hidden="{{activeTab != 'requirement'}}">
+        <view class="weui-cells__title">请选择您的饮食目标</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_select">
+            <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                <view class="weui-label">饮食目标</view>
+            </view>
+            <view class="weui-cell__bd">
+              <picker bindchange="bindAccountChange" value="{{purposeIndex}}" range="{{purposes}}">
+                <view class="weui-select weui-select_in-select-after">{{purposes[purposeIndex]}}</view>
+              </picker>
+            </view>
+          </view>
+        </view>
+
+        <view class="weui-cells__title">请设定您的总摄入量</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_slider">
+            <view class="weui-cell__hd">
+                <view class="weui-label">热量</view>
+            </view>
+            <view class="weui-cell__bd">
+              <slider show-value value="50"/>
+            </view>
+          </view>
+        </view>
+
+        <view class="weui-cells__title">请设定您各营养素摄入量</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_slider">
+            <view class="weui-cell__hd">
+                <view class="weui-label">蛋白质</view>
+            </view>
+            <view class="weui-cell__bd">
+              <slider show-value value="50"/>
+            </view>
+          </view>
+          <view class="weui-cell weui-cell_slider">
+            <view class="weui-cell__hd">
+                <view class="weui-label">脂肪</view>
+            </view>
+            <view class="weui-cell__bd">
+              <slider show-value value="50"/>
+            </view>
+          </view>
+          <view class="weui-cell weui-cell_slider">
+            <view class="weui-cell__hd">
+                <view class="weui-label">碳水化合物</view>
+            </view>
+            <view class="weui-cell__bd">
+              <slider show-value value="50"/>
+            </view>
+          </view>
+        </view>
+
+        <button class="weui-btn weui-btn_spacing" type="primary">确认此套营养方案</button>
+      </view>
+
+
+      <view id="tab-dishes" class="weui-tab__content" hidden="{{activeTab != 'dishes'}}">
+        <view class="weui-cells__title">请选择您的主菜</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-grids">
+            <block wx:for-items="{{dishes.primary}}" wx:key="{{index}}">
+              <view class="weui-grid" hover-class="weui-grid_active">
+                <image class="weui-grid__icon" src="../assets/icon-add.png" />
+                <view class="weui-grid__label">{{item}}</view>
+              </view>
+            </block>
+          </view>
+        </view>
+
+       <view class="weui-cells__title">请选择您的配菜</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-grids">
+            <block wx:for-items="{{dishes.secondary}}" wx:key="{{index}}">
+              <view class="weui-grid" hover-class="weui-grid_active">
+                <image class="weui-grid__icon" src="../assets/icon-add.png" />
+                <view class="weui-grid__label">{{item}}</view>
+              </view>
+            </block>
+          </view>
+        </view>
+
+        <button class="weui-btn weui-btn_spacing" type="primary">我选好了</button>
+      </view>
+
+
+      <view id="tab-combo" class="weui-tab__content" hidden="{{activeTab != 'combo'}}">
+        <view>Duang! 魔法之页！</view>
+        <view>便当号：89757</view>
+      </view>
+
+
+      <view id="tab-order" class="weui-tab__content" hidden="{{activeTab != 'order'}}">
+        <view class="weui-cells__title">请选择收货地址</view>
+        <view class="weui-cells weui-cells_after-title">
+          <radio-group bindchange="handleAddressChange">
+            <label class="weui-cell weui-check__label" wx:for="{{addresses}}" wx:key="{{item.value}}">
+              <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}"/>
+
+              <view class="weui-cell__bd">{{item.name}}</view>
+              <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+                <icon class="weui-icon-radio" type="success_no_circle" size="16"></icon>
+              </view>
+            </label>
+          </radio-group>
+          <view class="weui-cell weui-cell_link">
+            <view class="weui-cell__bd">使用新的地址</view>
+          </view>
+        </view>
+
+        <view class="weui-cells__title">请填写发票信息</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">发票抬头</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" placeholder="若无需发票，请留空"/>
+            </view>
+          </view>
+        </view>
+
+        <view class="weui-cells__title">您的购物车</view>
+        <view class="weui-form-preview">
+          <view class="weui-form-preview__hd">
+            <view class="weui-form-preview__item">
+              <view class="weui-form-preview__label">付款金额</view>
+              <view class="weui-form-preview__value_in-hd">¥54.00</view>
+            </view>
+          </view>
+          <view class="weui-form-preview__bd">
+            <view class="weui-form-preview__item">
+              <view class="weui-form-preview__label">轻食代套餐 #89757</view>
+              <view class="weui-form-preview__value">大菠萝</view>
+            </view>
+            <view class="weui-form-preview__item">
+              <view class="weui-form-preview__label"></view>
+              <view class="weui-form-preview__value">辣椒</view>
+            </view>
+            <view class="weui-form-preview__item">
+              <view class="weui-form-preview__label">轻食代套餐 #89758</view>
+              <view class="weui-form-preview__value">大菠萝</view>
+            </view>
+            <view class="weui-form-preview__item">
+              <view class="weui-form-preview__label"></view>
+              <view class="weui-form-preview__value">面包</view>
+            </view>
+          </view>
+          <view class="weui-form-preview__ft">
+            <navigator url="" class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">微信支付</navigator>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
