@@ -1,0 +1,20 @@
+{
+  "name": "qingdiet-wxapp",
+  "version": "0.0.0",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "standard": "^10.0.1"
+  },
+  "scripts": {
+    "lint": "standard --fix",
+    "watch": "gulp watch"
+  },
+  "standard": {
+    "globals": [
+      "wx",
+      "getApp",
+      "App",
+      "Page"
+    ]
+  }
+}
