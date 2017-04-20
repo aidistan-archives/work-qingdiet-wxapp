@@ -2,14 +2,18 @@ var app = getApp()
 
 Page({
   data: {
+    user: {},
     userInfo: {}
   },
   onLoad: function () {
-    var that = this
-    app.getUserInfo(function (userInfo) {
-      that.setData({
-        userInfo: userInfo
-      })
+    app.loginWeixin(() => {
+      app.getUser((user) => this.setData({ user: user }))
+      app.getUserInfo((userInfo) => this.setData({ userInfo: userInfo }))
     })
+  },
+  bindBirthdayChange: function (e) {
+    app._updateUser({
+      birthday: e.detail.value
+    }, (user) => this.setData({ user: user }))
   }
 })

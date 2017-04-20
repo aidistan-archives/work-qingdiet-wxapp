@@ -1,7 +1,6 @@
 // app.js
 App({
   onLaunch: function () {
-    this.loginWeiXin(this.loginQingDiet)
   },
   globalData: {
     config: {
@@ -22,30 +21,31 @@ App({
       console.log(Date().toString() + ' ' + msg + (obj ? ' ' + JSON.stringify(obj) : ''))
     }
   },
-  loginWeiXin: function (cb) {
-    var self = this
+  loginWeixin: function (cb) {
     if (this.globalData.code) {
       typeof cb === 'function' && cb()
     } else {
-      wx.login({
-        success: function (res) {
-          self.log('微信登陆成功', {code: res.code})
-          self.globalData.code = res.code
-          typeof cb === 'function' && cb()
-        },
-        fail: function () {
-          self.log('微信登陆失败')
-        }
-      })
+      this._loginWeixin(cb)
     }
+  },
+  _loginWeixin: function (cb) {
+    var self = this
+    wx.login({
+      success: function (res) {
+        self.log('微信登陆成功', {code: res.code})
+        self.globalData.code = res.code
+        typeof cb === 'function' && cb()
+      },
+      fail: function () {
+        self.log('微信登陆失败')
+      }
+    })
   },
   loginQingDiet: function (cb) {
     if (this.globalData.token) {
       typeof cb === 'function' && cb()
-    } else if (this.globalData.code) {
-      this._loginQingDiet()
     } else {
-      this.loginWeiXin(this._loginQingDiet)
+      this.loginWeixin(() => this._loginQingDiet(cb))
     }
   },
   _loginQingDiet: function (cb) {
@@ -65,18 +65,54 @@ App({
     })
   },
   getUserInfo: function (cb) {
-    var self = this
     if (this.globalData.userInfo) {
       typeof cb === 'function' && cb(this.globalData.userInfo)
     } else {
-      this.loginWeiXin(function () {
-        wx.getUserInfo({
-          success: function (res) {
-            self.globalData.userInfo = res.userInfo
-            typeof cb === 'function' && cb(self.globalData.userInfo)
-          }
-        })
-      })
+      this.loginWeixin(() => this._getUserInfo(cb))
     }
+  },
+  _getUserInfo: function (cb) {
+    var self = this
+    wx.getUserInfo({
+      success: function (res) {
+        self.globalData.userInfo = res.userInfo
+        typeof cb === 'function' && cb(res.userInfo)
+      }
+    })
+  },
+  getUser: function (cb) {
+    if (this.globalData.user) {
+      typeof cb === 'function' && cb(this.globalData.user)
+    } else {
+      this.loginQingDiet(() => this._getUser(cb))
+    }
+  },
+  _getUser: function (cb) {
+    var self = this
+    wx.request({
+      url: self.globalData.config.host + '/v1/users/me',
+      data: { access_token: self.globalData.token },
+      method: 'GET',
+      success: function (res) {
+        self.log('用户信息获取成功', {body: res.data})
+        self.globalData.user = res.data
+        typeof cb === 'function' && cb(res.data)
+      }
+    })
+  },
+  _updateUser: function (data, cb) {
+    data.access_token = this.globalData.token
+
+    var self = this
+    wx.request({
+      url: self.globalData.config.host + '/v1/users/me',
+      data: data,
+      method: 'PUT',
+      success: function (res) {
+        self.log('用户信息更新成功', {body: res.data})
+        self.globalData.user = res.data
+        typeof cb === 'function' && cb(res.data)
+      }
+    })
   }
 })
