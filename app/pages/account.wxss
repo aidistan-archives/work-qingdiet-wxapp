@@ -1,7 +1,5 @@
 .page__hd {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+  text-align: center;
 }
 
 .page__hd image {
@@ -15,6 +13,17 @@
   flex-grow: 1;
 }
 
-.weui-footer {
-  margin-bottom: 10rpx;
+.page__bd .weui-input {
+  text-align: right;
+}
+
+.address__detail {
+  margin-top: 5px;
+
+  color: #999999;
+  font-size: 13px
+}
+
+.page__ft {
+  padding: 20rpx 0 10rpx 0;
 }

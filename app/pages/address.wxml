@@ -1,0 +1,69 @@
+<view class="page">
+  <view class="weui-cells__title">联系方式</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+        <view class="weui-label">收件人</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" id="consignee" value="{{address.consignee}}" placeholder="请输入收件人" focus="{{focus === 'consignee'}}" confirm-type="next" bindinput="bindInput" bindconfirm="bindNextInput"/>
+      </view>
+    </view>
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+        <view class="weui-label">手机号码</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" id="mobile" value="{{address.mobile}}" type="number" placeholder="请输入手机号码" focus="{{focus === 'mobile'}}" confirm-type="next" bindinput="bindInput" bindconfirm="bindNextInput"/>
+      </view>
+    </view>
+  </view>
+
+  <view class="weui-cells__title">地址信息</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+        <view class="weui-label">省</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" id="province" value="{{address.province}}" placeholder="请输入省" focus="{{focus === 'province'}}" confirm-type="next" bindinput="bindInput" bindconfirm="bindNextInput"/>
+      </view>
+    </view>
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+        <view class="weui-label">市</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" id="city" value="{{address.city}}" placeholder="请输入市" focus="{{focus === 'city'}}" confirm-type="next" bindinput="bindInput" bindconfirm="bindNextInput"/>
+      </view>
+    </view>
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+        <view class="weui-label">区/县</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" id="district" value="{{address.district}}" placeholder="请输入区/县" focus="{{focus === 'district'}}" confirm-type="next" bindinput="bindInput" bindconfirm="bindNextInput"/>
+      </view>
+    </view>
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+        <view class="weui-label">详细地址</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" id="detail" value="{{address.detail}}" placeholder="请输入详细地址" focus="{{focus === 'detail'}}" confirm-type="done" bindinput="bindInput" bindconfirm="{{addressId ? 'bindAddressUpdate' : 'bindAddressCreate'}}"/>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{addressId}}" class="actions weui-flex">
+    <view class="weui-flex__item">
+      <button class="weui-btn" type="primary" bindtap="bindAddressUpdate">修改</button>
+    </view>
+    <view class="weui-flex__item">
+      <button class="weui-btn" type="warn" bindtap="bindAddressDelete">删除</button>
+    </view>
+  </view>
+  <view wx:else class="actions">
+    <button class="weui-btn weui-btn_spacing" type="primary" bindtap="bindAddressCreate">确认添加</button>
+  </view>
+</view>

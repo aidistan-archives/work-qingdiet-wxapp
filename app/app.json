@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/account",
+    "pages/address",
     "pages/order",
     "pages/orders/new"
   ],

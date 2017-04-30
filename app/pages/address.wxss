@@ -1,0 +1,7 @@
+.actions {
+  margin-top: 15px;
+}
+
+.actions view {
+  margin: 0 10px;
+}

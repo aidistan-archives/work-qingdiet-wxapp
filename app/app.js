@@ -1,7 +1,5 @@
 // app.js
 App({
-  onLaunch: function () {
-  },
   globalData: {
     config: {
       host: 'https://api.qdiet.cn',
@@ -55,7 +53,7 @@ App({
       data: {code: this.globalData.code},
       method: 'POST',
       success: function (res) {
-        self.log('系统登陆成功', {body: res.data})
+        self.log('系统登陆成功', res)
         self.globalData.token = res.data.access_token
         typeof cb === 'function' && cb()
       },
@@ -94,7 +92,7 @@ App({
       data: { access_token: self.globalData.token },
       method: 'GET',
       success: function (res) {
-        self.log('用户信息获取成功', {body: res.data})
+        self.log('用户信息获取成功', res)
         self.globalData.user = res.data
         typeof cb === 'function' && cb(res.data)
       }
@@ -109,9 +107,83 @@ App({
       data: data,
       method: 'PUT',
       success: function (res) {
-        self.log('用户信息更新成功', {body: res.data})
+        self.log('用户信息更新成功', res)
         self.globalData.user = res.data
         typeof cb === 'function' && cb(res.data)
+      }
+    })
+  },
+  _getAddresses: function (cb) {
+    var self = this
+    wx.request({
+      url: self.globalData.config.host + '/v1/addresses',
+      data: { access_token: self.globalData.token },
+      method: 'GET',
+      success: function (res) {
+        self.log('用户地址获取成功', res)
+        typeof cb === 'function' && cb(res.data)
+      }
+    })
+  },
+  _getAddress: function (id, cb) {
+    var self = this
+    wx.request({
+      url: self.globalData.config.host + '/v1/addresses/' + id,
+      data: { access_token: self.globalData.token },
+      method: 'GET',
+      success: function (res) {
+        self.log('用户地址获取成功', res)
+        typeof cb === 'function' && cb(res.data)
+      }
+    })
+  },
+  _createAddress: function (data, success, failed) {
+    data.access_token = this.globalData.token
+
+    var self = this
+    wx.request({
+      url: self.globalData.config.host + '/v1/addresses',
+      data: data,
+      method: 'POST',
+      success: function (res) {
+        if (res.statusCode === 201) {
+          self.log('用户地址创建成功', res)
+          typeof success === 'function' && success(res.data)
+        } else {
+          self.log('用户地址创建失败', res)
+          typeof success === 'function' && failed(res.data)
+        }
+      }
+    })
+  },
+  _updateAddress: function (id, data, success, failed) {
+    data.access_token = this.globalData.token
+
+    var self = this
+    wx.request({
+      url: self.globalData.config.host + '/v1/addresses/' + id,
+      data: data,
+      method: 'PUT',
+      success: function (res) {
+        if (res.statusCode === 200) {
+          self.log('用户地址更新成功', res)
+          typeof success === 'function' && success(res.data)
+        } else {
+          self.log('用户地址更新失败', res)
+          typeof success === 'function' && failed(res.data)
+        }
+      }
+    })
+  },
+  _deleteAddress: function (id, cb) {
+    var self = this
+    wx.request({
+      url: self.globalData.config.host + '/v1/addresses/' + id,
+      data: { access_token: self.globalData.token },
+      method: 'DELETE',
+      success: function (res) {
+        self.log('用户地址删除成功', res)
+        typeof cb === 'function' && cb()
       }
     })
   }
