@@ -9,7 +9,19 @@
     <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell weui-cell_input">
         <view class="weui-cell__hd">
-          <view class="weui-label">出生日期</view>
+          <view class="weui-label">性别</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker mode="selector" range="{{GENDERS}}" value="{{genderIndex}}" bindchange="bindGenderChange">
+            <view wx:if="{{user.gender === 'male'}}" class="weui-input">男</view>
+            <view wx:elif="{{user.gender === 'female'}}" class="weui-input">女</view>
+            <view wx:else class="weui-input weui-placeholder">请填写您的性别</view>
+          </picker>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">生日</view>
         </view>
         <view class="weui-cell__bd">
           <picker mode="date" value="{{user.birthday}}" start="1921-07-01" end="2017-01-01" bindchange="bindBirthdayChange">
