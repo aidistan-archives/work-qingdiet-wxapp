@@ -13,7 +13,8 @@
         </view>
         <view class="weui-cell__bd">
           <picker mode="date" value="{{user.birthday}}" start="1921-07-01" end="2017-01-01" bindchange="bindBirthdayChange">
-            <view class="weui-input">{{user.birthday ? user.birthday : ''}}</view>
+            <view wx:if="{{user.birthday}}" class="weui-input">{{user.birthday}}</view>
+            <view wx:else class="weui-input weui-placeholder">请填写您的生日</view>
           </picker>
         </view>
       </view>
@@ -21,17 +22,29 @@
 
     <view class="weui-cells__title">地址管理</view>
     <view class="weui-cells weui-cells_after-title">
-      <view wx:for="{{addresses}}" wx:key="id" class="weui-cell weui-cell_access" data-address-id="{{item.id}}" bindtap="bindAddressEdit">
+      <navigator wx:for="{{addresses}}" wx:key="id"
+                 url="address?id={{item.id}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
         <view class="weui-cell__bd">
           <view>{{item.consignee}} {{item.mobile}}</view>
           <view class="address__detail">{{item.province}}{{item.city}}{{item.district}}{{item.town}}{{item.detail}}</view>
         </view>
         <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-      </view>
-      <view class="weui-cell weui-cell_access weui-cell_link" bindtap="bindAddressCreate">
+      </navigator>
+      <navigator url="address" class="weui-cell weui-cell_access weui-cell_link" hover-class="weui-cell_active">
         <view class="weui-cell__bd">添加地址</view>
         <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-      </view>
+      </navigator>
+    </view>
+
+    <view class="weui-cells">
+      <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+        <view class="weui-cell__bd">意见反馈</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+      </navigator>
+      <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+        <view class="weui-cell__bd">关于我们</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+      </navigator>
     </view>
   </view>
 

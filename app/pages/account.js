@@ -29,11 +29,5 @@ Page({
     app._updateUser({
       birthday: e.detail.value
     }, (user) => this.setData({user: user}))
-  },
-  bindAddressCreate: function () {
-    wx.navigateTo({url: 'address'})
-  },
-  bindAddressEdit: function (e) {
-    wx.navigateTo({url: 'address?id=' + e.currentTarget.dataset.addressId})
   }
 })

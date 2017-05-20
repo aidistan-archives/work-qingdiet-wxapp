@@ -1,27 +1,30 @@
 {
-  "pages":[
+  "pages": [
     "pages/account",
     "pages/address",
     "pages/order",
     "pages/orders/new"
   ],
-  "window":{
+  "window": {
     "navigationBarTitleText": "轻食代",
-    "navigationBarTextStyle":"black",
+    "navigationBarTextStyle": "black",
     "navigationBarBackgroundColor": "#f8f8f8",
     "backgroundColor": "#f8f8f8"
   },
   "tabBar": {
-    "list": [{
-      "pagePath": "pages/order",
-      "text": "订购",
-      "iconPath": "assets/icon-add.png",
-      "selectedIconPath": "assets/icon-add-primary.png"
-    }, {
-      "pagePath": "pages/account",
-      "text": "我的",
-      "iconPath": "assets/icon-account.png",
-      "selectedIconPath": "assets/icon-account-primary.png"
-    }]
+    "list": [
+      {
+        "pagePath": "pages/order",
+        "text": "订购",
+        "iconPath": "assets/icon-add.png",
+        "selectedIconPath": "assets/icon-add-primary.png"
+      },
+      {
+        "pagePath": "pages/account",
+        "text": "我的",
+        "iconPath": "assets/icon-account.png",
+        "selectedIconPath": "assets/icon-account-primary.png"
+      }
+    ]
   }
 }

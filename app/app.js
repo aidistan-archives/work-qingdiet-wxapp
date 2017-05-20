@@ -73,6 +73,7 @@ App({
     var self = this
     wx.getUserInfo({
       success: function (res) {
+        self.log('微信信息获取成功', res)
         self.globalData.userInfo = res.userInfo
         typeof cb === 'function' && cb(res.userInfo)
       }

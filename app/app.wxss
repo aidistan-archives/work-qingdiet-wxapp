@@ -39,6 +39,10 @@ button[type="secondary"][plain][disabled] {
   padding-bottom: 5rpx;
 }
 
+.weui-placeholder {
+  color: #888888;
+}
+
 /**
  * Global styles
  */
