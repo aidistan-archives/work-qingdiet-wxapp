@@ -36,6 +36,7 @@ App({
       },
       fail: function () {
         self.log('微信登陆失败')
+        typeof cb === 'function' && cb(new Error('微信登陆失败'))
       }
     })
   },
@@ -43,7 +44,7 @@ App({
     if (this.globalData.token) {
       typeof cb === 'function' && cb()
     } else {
-      this.loginWeixin(() => this._loginQingDiet(cb))
+      this.loginWeixin((err) => err || this._loginQingDiet(cb))
     }
   },
   _loginQingDiet: function (cb) {
@@ -59,12 +60,13 @@ App({
       },
       fail: function () {
         self.log('系统登陆失败')
+        typeof cb === 'function' && cb(new Error('系统登陆失败'))
       }
     })
   },
   getUserInfo: function (cb) {
     if (this.globalData.userInfo) {
-      typeof cb === 'function' && cb(this.globalData.userInfo)
+      typeof cb === 'function' && cb(null, this.globalData.userInfo)
     } else {
       this.loginWeixin(() => this._getUserInfo(cb))
     }
@@ -75,13 +77,17 @@ App({
       success: function (res) {
         self.log('微信信息获取成功', res)
         self.globalData.userInfo = res.userInfo
-        typeof cb === 'function' && cb(res.userInfo)
+        typeof cb === 'function' && cb(null, res.userInfo)
+      },
+      fail: function () {
+        self.log('微信信息获取失败')
+        typeof cb === 'function' && cb(new Error('微信信息获取失败'))
       }
     })
   },
   getUser: function (cb) {
     if (this.globalData.user) {
-      typeof cb === 'function' && cb(this.globalData.user)
+      typeof cb === 'function' && cb(null, this.globalData.user)
     } else {
       this.loginQingDiet(() => this._getUser(cb))
     }
@@ -95,7 +101,7 @@ App({
       success: function (res) {
         self.log('用户信息获取成功', res)
         self.globalData.user = res.data
-        typeof cb === 'function' && cb(res.data)
+        typeof cb === 'function' && cb(null, res.data)
       }
     })
   },
@@ -110,7 +116,7 @@ App({
       success: function (res) {
         self.log('用户信息更新成功', res)
         self.globalData.user = res.data
-        typeof cb === 'function' && cb(res.data)
+        typeof cb === 'function' && cb(null, res.data)
       }
     })
   },
@@ -122,7 +128,7 @@ App({
       method: 'GET',
       success: function (res) {
         self.log('用户地址获取成功', res)
-        typeof cb === 'function' && cb(res.data)
+        typeof cb === 'function' && cb(null, res.data)
       }
     })
   },
@@ -134,11 +140,11 @@ App({
       method: 'GET',
       success: function (res) {
         self.log('用户地址获取成功', res)
-        typeof cb === 'function' && cb(res.data)
+        typeof cb === 'function' && cb(null, res.data)
       }
     })
   },
-  _createAddress: function (data, success, failed) {
+  _createAddress: function (data, cb) {
     data.access_token = this.globalData.token
 
     var self = this
@@ -149,15 +155,15 @@ App({
       success: function (res) {
         if (res.statusCode === 201) {
           self.log('用户地址创建成功', res)
-          typeof success === 'function' && success(res.data)
+          typeof cb === 'function' && cb(null, res.data)
         } else {
           self.log('用户地址创建失败', res)
-          typeof success === 'function' && failed(res.data)
+          typeof cb === 'function' && cb(new Error(), res.data)
         }
       }
     })
   },
-  _updateAddress: function (id, data, success, failed) {
+  _updateAddress: function (id, data, cb) {
     data.access_token = this.globalData.token
 
     var self = this
@@ -168,10 +174,10 @@ App({
       success: function (res) {
         if (res.statusCode === 200) {
           self.log('用户地址更新成功', res)
-          typeof success === 'function' && success(res.data)
+          typeof cb === 'function' && cb(null, res.data)
         } else {
           self.log('用户地址更新失败', res)
-          typeof success === 'function' && failed(res.data)
+          typeof cb === 'function' && cb(new Error(), res.data)
         }
       }
     })

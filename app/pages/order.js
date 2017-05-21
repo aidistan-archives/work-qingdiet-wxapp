@@ -1,6 +1,6 @@
 Page({
   bindTapSingle: function () {
-    wx.navigateTo({url: 'orders/new'})
+    wx.navigateTo({ url: 'orders/new' })
   },
   bindTapMultiple: function () {
   }
