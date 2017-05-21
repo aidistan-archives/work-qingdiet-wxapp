@@ -1,4 +1,4 @@
-@import "weui.wxss";
+@import "vendor/weui.wxss";
 
 /**
  * Supplementary for built-in
