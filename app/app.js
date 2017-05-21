@@ -30,7 +30,7 @@ App({
     var self = this
     wx.login({
       success: function (res) {
-        self.log('微信登陆成功', {code: res.code})
+        self.log('微信登陆成功', { code: res.code })
         self.globalData.code = res.code
         typeof cb === 'function' && cb()
       },
@@ -51,7 +51,7 @@ App({
     var self = this
     wx.request({
       url: this.globalData.config.host + '/v1/login/weixin/access_token',
-      data: {code: this.globalData.code},
+      data: { code: this.globalData.code },
       method: 'POST',
       success: function (res) {
         self.log('系统登陆成功', res)

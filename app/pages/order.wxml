@@ -1,9 +1,9 @@
 <view class="page">
-  <view class="half" bindtap="bindTapSingle">
+  <navigator url="orders/new" class="half">
     <image mode="aspectFit" src="/assets/icon-single.png"></image>
     <button class="weui-btn" type="secondary">单人订餐</button>
-  </view>
-  <view class="half" bindtap="bindTapMultiple">
+  </navigator>
+  <view class="half">
     <view class="mask"></view>
     <image mode="aspectFit" src="/assets/icon-multiple.png"></image>
     <button class="weui-btn" type="secondary">团队订餐</button>

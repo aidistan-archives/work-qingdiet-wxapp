@@ -12,8 +12,8 @@ Page({
     },
 
     addresses: [
-        {name: '大笨蛋1号', value: '0'},
-        {name: '大傻瓜2号', value: '1', checked: true}
+      { name: '大笨蛋1号', value: '0' },
+      { name: '大傻瓜2号', value: '1', checked: true }
     ]
   },
   handleNavTap: function (e) {
